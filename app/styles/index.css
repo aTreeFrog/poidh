@@ -1,0 +1,826 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #7ab2e7;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.site-container {
+  display: flex;
+  /* Use Flexbox */
+  flex-direction: column;
+  /* Stack children vertically */
+  min-height: 100vh;
+  /* Ensure at least full viewport height */
+}
+
+.content-wrap {
+  flex: 1;
+  /* Flex grow to take available space */
+  /* More content styling */
+}
+
+p,
+.bounty-title,
+.process-string {
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+#app {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding-top: 10px;
+}
+
+#app div {
+  width: 100%;
+}
+
+#app div div {
+  height: 100%;
+}
+
+#app div div div {
+  position: relative;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+header h1 {
+  font-size: 3.5em;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+label {
+  display: block;
+  margin: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+nav a {
+  margin: 12px;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+button {
+  -webkit-transition-duration: 0.1s;
+  /* Safari */
+  transition-duration: 0.1s;
+  background-color: #f4595b;
+  border-radius: 8px;
+  border-width: 1px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Oxygen', sans-serif;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  background-color: #c24648;
+  border: none;
+  border-radius: 8px;
+  border-bottom: 4px solid #c24648;
+  color: #ccc;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Oxygen', sans-serif;
+  letter-spacing: 2px;
+}
+
+img {
+  max-width: 90%;
+  max-height: 340px;
+  top: 5%;
+  left: 5%;
+}
+
+.myForm {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 0.8em;
+  width: 50em;
+  padding: 1em;
+}
+
+.myForm * {
+  box-sizing: border-box;
+}
+
+.myForm fieldset {
+  border: none;
+  padding: 0;
+}
+
+.myForm legend,
+.myForm label {
+  padding: 0;
+  font-weight: bold;
+}
+
+.myForm label.choice {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.myForm input[type='text'],
+.myForm input[type='tel'],
+.myForm input[type='email'],
+.myForm input[type='datetime-local'],
+.myForm select,
+.myForm textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 0.6em;
+  padding: 0.3em;
+}
+
+.myForm textarea {
+  height: 100px;
+}
+
+.form-center {
+  display: flex;
+  justify-content: center;
+}
+
+.vertical {
+  resize: vertical;
+}
+
+.hamburger-menu-wrap {
+  padding-top: 1em;
+  padding-right: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-close-wrap {
+  padding-top: 0.5em;
+  padding-right: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #7ab2e7;
+  z-index: 1;
+}
+
+.menu-list-wrap {
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.5em;
+}
+
+.terms-list-prohibited {
+  color: white;
+}
+
+.menu-list-wrap li {
+  margin: 1em;
+  cursor: pointer;
+}
+
+.bounties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  justify-items: center;
+  margin-top: 3em;
+}
+
+.all-bounties-grid {
+  margin-top: 0;
+}
+
+.bounties-table {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  margin-top: 3em;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  color: white !important;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.css-15wwp11-MuiTableHead-root,
+.css-1ygcj2i-MuiTableCell-root {
+  background-color: #f4595b;
+  color: white !important;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.my-bounties-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5em;
+}
+
+@media screen and (max-width: 1100px) {
+  .bounties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive layout - makes the grid list stack on top of each other instead of next to each other */
+@media screen and (max-width: 768px) {
+  .bounties-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.bounty-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 300px;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+.bounty-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bounty-card-title-amount-wrap,
+.bounty-card-amount-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bounty-description {
+  text-align: left;
+  margin-top: 0px;
+  min-height: 37px;
+  word-wrap: break-word;
+  ;
+}
+
+.bounty-title {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: left;
+  max-width: 150px;
+}
+
+.bounty-details-button-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bounty-details-button {
+  padding: 5px 12.5px;
+  margin: 0px 10px;
+  font-size: 0.85em;
+}
+
+.bounty-card-amount-logo {
+  width: 40px;
+}
+
+.bounty-card-amount {
+  padding: 0px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.claim-popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.claim-popup {
+  position: absolute;
+  background-color: #7ab2e7;
+  padding: 20px;
+  border-radius: 8px;
+  width: 75%;
+  height: 75%;
+  max-width: 300px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  border-bottom-left-radius: 12.5px;
+  border-bottom-right-radius: 12.5px;
+}
+
+.claim-popup h3 {
+  margin-top: 0;
+}
+
+.claim-popup-content-wrap {
+  flex-grow: 1;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.claim-popup-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.claim-name,
+.claim-uri,
+.claim-description {
+  padding: 10px 0px;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.25em;
+  margin: 0px;
+}
+
+.process-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.upload-wrap {
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1em;
+  margin: 0px;
+}
+
+.upload-loader {
+  padding-bottom: 10px;
+}
+
+.claim-name-input,
+.claim-description-input {
+  width: 75%;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1em;
+}
+
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 4px;
+  border-color: #f4595b;
+  border-style: dashed;
+  background-color: #7ab2e7;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+  height: 100%;
+  max-height: 225px;
+}
+
+.create-claim-menu-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-height: 40px;
+  color: #f4595b;
+  border-bottom-left-radius: 12.5px;
+  border-bottom-right-radius: 12.5px;
+}
+
+.create-claim-close {
+  display: flex;
+  width: 80px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.create-bounty-close {
+  position: absolute;
+  bottom: 2.5%;
+  right: 2.5%;
+}
+
+.create-claim-tab {
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.25em;
+  border-right: 1px solid #f4595b;
+}
+
+.create-claim-active {
+  color: #7ab2e7;
+  font-size: 1.35em;
+  border-right: 1px solid #7ab2e7 !important;
+}
+
+.claim-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.claim-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.claim-card-image {
+  width: 100%;
+  height: auto;
+}
+
+.claim-card-info {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 0.75em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+}
+
+.claim-image {
+  max-width: 100%;
+  height: auto;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.claim-card-title {
+  font-size: 1.05em;
+  font-weight: bold;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  margin: 10px 0px;
+  text-align: left;
+}
+
+.claim-card-issuer {
+  color: white;
+  font-size: 0.85em;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.claim-card-details {
+  font-size: 0.85em;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.nft-card-details {
+  font-size: 0.85em;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.bounty-card-details {
+  font-size: 1em;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  width: 33%;
+}
+
+summary::marker {
+  color: #f4595b;
+}
+
+summary::-webkit-details-marker {
+  color: #f4595b;
+}
+
+.summary {
+  text-align: left;
+}
+
+.summary-body {
+  max-width: 90%;
+  margin: 5px 2px;
+  text-align: left;
+  font-size: 0.9em;
+  word-wrap: break-word;
+}
+
+.summary-issuer {
+  font-size: 0.8em;
+}
+
+.bounty-details-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bounty-details {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75%;
+  flex-direction: column;
+}
+
+.nft-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .bounty-details {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .claim-card {
+    width: 270px;
+  }
+}
+
+.claim-card-button {
+  padding: 5px 12.5px;
+  font-size: 0.8em;
+}
+
+.claim-card-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.bounty-details-connect-claim-button-wrap {
+  margin-top: 4em;
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.accepted-claim {
+  border: 3px solid #f4595b;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.bounty-details-title {
+  margin: 10px 0px;
+}
+
+.share-bounty-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.share-bounty-wrap p {
+  padding: 5px;
+}
+
+.preview-actions-wrap {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin-top: 3em;
+}
+
+.crop-wrap {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(36, 36, 36, 0.75);
+}
+
+.crop-inner-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.crop-finish-button {
+  position: relative;
+  z-index: 10000;
+}
+
+.all-bounties-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1200px;
+  padding-bottom: 120px;
+}
+
+.all-bounties-control {
+  width: 50%;
+}
+
+.bounty-creation-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(36, 36, 36, 0.75);
+}
+
+.bounty-creation-inner-wrap {
+  background-color: #7ab2e7;
+  border-radius: 12.5px;
+  width: 80%;
+  max-width: 625px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 5em;
+}
+
+.table-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  justify-content: flex-start;
+  /* or center, space-between, etc. */
+}
+
+.summary-align-left {
+  text-align: left;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.summary-align-right {
+  text-align: right;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.summary-table:not(:first-child) {
+  margin-left: 80px;
+  flex-grow: 1;
+  /* Adjust the space as needed */
+}
+
+/* Mobile view - stack tables vertically */
+@media screen and (max-width: 768px) {
+
+  /* adjust 768px based on your design needs */
+  .table-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+
+  .summary-table:nth-child(1) {
+    margin-left: 0px;
+    justify-content: flex-start;
+    flex-grow: 1;
+    text-align: left;
+    /* Adjust the space as needed */
+  }
+
+  .summary-table:nth-child(2) {
+    margin-left: 1px;
+    justify-content: flex-start;
+    flex-grow: 1;
+    text-align: left;
+    /* Adjust the space as needed */
+  }
+
+  .summary-table:nth-child(3) {
+    margin-left: 0px;
+    justify-content: flex-start;
+    flex-grow: 1;
+    text-align: left;
+    /* Adjust the space as needed */
+  }
+
+  .summary-table th:nth-child(2) {
+    padding-left: 50px;
+  }
+
+  .table-container>.summary-table:nth-child(3) th.summary-align-right {
+    padding-left: 70px;
+    /* Adjust this value as needed */
+  }
+
+}
+
+.my-profile-header {
+  margin-bottom: 20px;
+  /* Adjust this value as needed */
+  line-height: 1.2;
+  /* Adjust based on your design */
+}
+
+.formatted-account {
+  padding-left: 115px;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  text-align: left;
+}
+
+.loading-nft {
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75%;
+  flex-direction: column;
+  padding-left: 565px;
+  font-size: 1.5em;
+}
+
+.footer-style {
+  text-Align: 'center';
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  padding: '20em';
+  margin-bottom: 2em;
+}

@@ -21,11 +21,16 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.0"
   },
   "lint-staged": {
     "*.js": "eslint --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "react-icons": "^4.12.0"
   }
 }
