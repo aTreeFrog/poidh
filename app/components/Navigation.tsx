@@ -4,9 +4,7 @@ import { FaX } from 'react-icons/fa6';
 import { useRouter } from 'next/router'; // Using Next.js's useRouter
 
 interface NavigationProps {
-  wallet: {
-    accounts: Array<{ address: string }>;
-  };
+  wallet: any;
 }
 
 function Navigation({ wallet }: NavigationProps) {

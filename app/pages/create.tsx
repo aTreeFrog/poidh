@@ -4,10 +4,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BountyCreation from './Bounties/BountyCreation';
+import BountyCreation from '../components/bounties/BountyCreation';
 import { useContractData } from '../context/ContractContext'
 
-const Home: React.FC = () => {
+const create: React.FC = () => {
     const {
         wallet,
         connect,
@@ -56,10 +56,11 @@ const Home: React.FC = () => {
                     </button>
                 </div>
             ) : (
-                <BountyCreation userBalance={userBalance} />
+                <BountyCreation
+                    userBalance={userBalance} />
             )}
         </div>
     );
 }
 
-export default Home;
+export default create;

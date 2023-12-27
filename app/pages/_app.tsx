@@ -8,12 +8,15 @@ import { ContractProvider } from '../context/ContractContext';
 
 function App({ Component, pageProps }: AppProps) {
     const {
-        wallet
+        wallet,
+        fetchUserClaims,
+        fetchUserBalance
     } = useContract();
 
     useEffect(() => {
         if (wallet?.provider) {
-            // ... Your wallet setup code
+            fetchUserClaims();
+            fetchUserBalance();
         }
     }, [wallet]);
 

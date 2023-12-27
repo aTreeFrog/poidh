@@ -11,7 +11,7 @@ interface ContractContextProps {
     connect: any;
     disconnect: any;
     connecting: any;
-    userBalance: number;
+    userBalance: string;
     userBounties: Bounty[];
     unClaimedBounties: Bounty[];
     claimedBounties: Bounty[];
