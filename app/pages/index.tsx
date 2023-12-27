@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import BountyCard from './BountyCard';
+import BountyCard from '../components/bounties/BountyCard';
 import { ToastContainer } from 'react-toastify';
-import BountyCreation from './BountyCreation';
+import BountyCreation from '../components/bounties/BountyCreation';
 import { ZeroAddress, ethers } from 'ethers';
+import { Bounty } from '../interfaces/BountiesInterface';
+import { useContractData } from '../context/ContractContext'
 
 const BOUNTIES_PER_PAGE = 18;
 
@@ -16,16 +18,16 @@ const BOUNTIES_PER_PAGE = 18;
  * @returns An object containing the list of fetched bounties, a boolean indicating if more bounties are available, and the last index processed.
  */
 const fetchBounties = async (
-  connectedContract,
-  count = null,
-  startIndex = null
+  connectedContract: any,
+  count: number | null = null,
+  startIndex: number | null = null
 ) => {
   try {
     if (connectedContract) {
       // Get the total number of bounties and adjust for zero-based indexing
       const allBountiesLength =
         Number(await connectedContract.getBountiesLength()) - 1;
-      let unclaimedBounties = [];
+      let unclaimedBounties = [] as Bounty[];
       // Start fetching from the provided startIndex
       let index = startIndex || allBountiesLength;
       const batchSize = 20; // Number of bounties to fetch in each batch
@@ -38,9 +40,9 @@ const fetchBounties = async (
         const end = index;
 
         // Fetch a batch of bounties from the contract
-        const bountyBatch = await connectedContract.getBounties(start, end);
+        const bountyBatch: any[] = await connectedContract.getBounties(start, end);
         // Process and filter the fetched bounties
-        const filteredBounties = bountyBatch
+        const filteredBounties: Bounty[] = bountyBatch
           .map(bounty => ({
             id: Number(bounty.id),
             issuer: bounty.issuer,
@@ -82,29 +84,37 @@ const fetchBounties = async (
         index -= batchSize;
       }
       return {
-        bounties: unclaimedBounties,
-        hasMore,
-        lastIndex,
+        bounties: unclaimedBounties != null ? unclaimedBounties : [],
+        hasMore: hasMore != null ? hasMore : false,
+        lastIndex: lastIndex != null ? lastIndex : false,
       };
+
     }
   } catch (error) {
     console.error('Error fetching bounties:', error);
+    return {
+      bounties: [], // Default to an empty array if undefined
+      hasMore: false, // Determine based on your logic
+      lastIndex: 0 // Default to 0 or appropriate value if undefined
+    };
   }
 };
 
-function AllBounties({
-  fetchAllBounties,
-  getContract,
-  cancelBounty,
-  wallet,
-  connect,
-  disconnect,
-  connecting,
-  userBalance,
-}) {
+const Home: React.FC = () => {
+  const {
+    fetchAllBounties,
+    getContract,
+    cancelBounty,
+    wallet,
+    connect,
+    disconnect,
+    connecting,
+    userBalance,
+  } = useContractData();
+
   const [showCreateBounty, setShowCreateBounty] = useState(false);
 
-  const [bounties, setBounties] = useState([true]);
+  const [bounties, setBounties] = useState([] as Bounty[]);
   const [hasMore, setHasMore] = useState(true);
 
   const [offset, setOffset] = useState(0);
@@ -118,10 +128,10 @@ function AllBounties({
       const { bounties, hasMore, lastIndex } = await fetchBounties(
         contract,
         BOUNTIES_PER_PAGE
-      );
+      ) ?? { bounties: [], hasMore: false, lastIndex: 0 };
       setBounties(bounties);
       setHasMore(hasMore);
-      setOffset(lastIndex);
+      setOffset(Number(lastIndex));
     };
 
     fetchInitialBounties();
@@ -135,19 +145,15 @@ function AllBounties({
     setIsUpdating(false);
     const contract = await getContract();
 
-    const {
-      bounties: moreBounties,
-      hasMore,
-      lastIndex,
-    } = await fetchBounties(
+    const { bounties: moreBounties, hasMore, lastIndex, } = await fetchBounties(
       contract,
       BOUNTIES_PER_PAGE,
       offset - BOUNTIES_PER_PAGE
-    );
+    ) ?? { bounties: [], hasMore: false, lastIndex: 0 };
 
     setBounties([...bounties, ...moreBounties]);
     setHasMore(hasMore);
-    setOffset(lastIndex);
+    setOffset(Number(lastIndex));
     setIsUpdating(true);
     console.log("isUpdating: ", isUpdating);
     console.log("intervalId: ", intervalId);
@@ -214,7 +220,6 @@ function AllBounties({
           <div className="bounty-creation-wrapper">
             <BountyCreation
               userBalance={userBalance}
-              handleClose={handleCreateBounty}
             />
           </div>
         )}
@@ -223,16 +228,4 @@ function AllBounties({
   );
 }
 
-AllBounties.propTypes = {
-  unClaimedBounties: PropTypes.array.isRequired,
-  wallet: PropTypes.object,
-  connect: PropTypes.func.isRequired,
-  disconnect: PropTypes.func.isRequired,
-  connecting: PropTypes.bool.isRequired,
-  fetchAllBounties: PropTypes.func.isRequired,
-  cancelBounty: PropTypes.func.isRequired,
-  userBalance: PropTypes.string.isRequired,
-  getContract: PropTypes.func.isRequired,
-};
-
-export default AllBounties;
+export default Home;

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BeatLoader } from 'react-spinners';
 import { useContract } from '../../web3';
 
-function BountyCreation({ userBalance }) {
+function BountyCreation({ userBalance }: { userBalance: string }) {
   const { createBounty } = useContract();
   const [bountyAmount, setBountyAmount] = useState(0);
   const [bountyName, setBountyName] = useState('');
@@ -25,7 +25,7 @@ function BountyCreation({ userBalance }) {
       toast.error('Bounty amount should be a number greater than 0');
       return;
     }
-    if (parseFloat(bountyAmount) > parseFloat(userBalance)) {
+    if (parseFloat(bountyAmount.toString()) > parseFloat(userBalance)) {
       toast.error('Bounty amount should not exceed your balance');
       return;
     }
@@ -51,7 +51,7 @@ function BountyCreation({ userBalance }) {
             <input
               type="text"
               name="customer_name"
-              maxLength="40"
+              maxLength={40}
               required
               value={bountyName}
               onChange={e => setBountyName(e.target.value)}
@@ -66,7 +66,7 @@ function BountyCreation({ userBalance }) {
               name="bounty_eth"
               required
               value={bountyAmount}
-              onChange={e => setBountyAmount(e.target.value)}
+              onChange={e => setBountyAmount(Number(e.target.value))}
             />
           </label>
         </p>
@@ -77,9 +77,9 @@ function BountyCreation({ userBalance }) {
             <textarea
               className="vertical"
               name="comments"
-              maxLength="300"
+              maxLength={300}
               value={bountyDescription}
-              onChange={e => setBountyDescription(e.target.value)}
+              onChange={e => setBountyDescription(e.target.value.toString())}
             ></textarea>
           </label>
         </p>
@@ -101,10 +101,5 @@ function BountyCreation({ userBalance }) {
     </div>
   );
 }
-
-BountyCreation.propTypes = {
-  userBalance: PropTypes.string,
-  handleClose: PropTypes.func.isRequired,
-};
 
 export default BountyCreation;
